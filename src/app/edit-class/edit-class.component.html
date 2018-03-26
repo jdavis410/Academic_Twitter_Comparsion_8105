@@ -1,0 +1,31 @@
+<p>
+  edit-class works!
+</p>
+<ul>
+  <li *ngFor="let student of students" [value]="student.handle">
+    <a>
+      {{student.handle}}
+    </a>
+    <button mat-basic-chip (click)="deleteStudent(student)">
+      x
+    </button>
+  </li>
+</ul>
+<div layout="row">
+  <table class="" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="">
+          <input matInput placeholder="Name" [(ngModel)]="inputName">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="">
+          <input matInput placeholder="Handle" [(ngModel)]="inputHandle">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <button mat-raised-button color="primary" (click)="addStudent(inputName, inputHandle)">Add Student</button>
+</div>
+<button mat-raised-button color="primary" (click)="deleteSection()">Delete Class</button>

@@ -1,0 +1,14 @@
+<p>
+  class-view works!
+</p>
+<form>
+  <mat-form-field>
+    <mat-select [(ngModel)]="selectedValue" name="student">
+      <mat-placeholder>Goto Student</mat-placeholder>
+      <mat-option *ngFor="let student of students" [value]="student.id">
+        {{student.handle}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="primary" routerLink="/student/{{selectedValue}}">Go to Class</button>
+</form>

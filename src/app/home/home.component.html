@@ -1,0 +1,16 @@
+<p>
+  home works!
+</p>
+<form>
+<mat-form-field>
+  <mat-select [(ngModel)]="selectedValue" name="section">
+    <mat-placeholder>Section</mat-placeholder>
+    <mat-option *ngFor="let section of sections" [value]="section.courseNum">
+      {{section.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-raised-button color="primary" routerLink="/view/{{selectedValue}}">Go to Class</button>
+  <a routerLink="/edit/{{selectedValue}}">Edit Class</a>
+
+</form>
