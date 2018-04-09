@@ -1,4 +1,6 @@
 import {Tweet} from './tweetClass';
+import {StudentService} from '../services/student.service';
+
 export class Student {
   id: number;
   name : string;
@@ -8,11 +10,16 @@ export class Student {
   totTweets: number;
   totRetweets: number;
   totLikes: number;
-  topicDist: string[];
+  topicDist: Array<String>;
   topicDistNum: number[];
 
   constructor(name: string, handle: string) {
     this.name = name;
     this.handle = handle;
+    this.topicDist = ['#2110ctv', 'HuckleBerry', 'Research'];
+    this. topicDistNum = [5, 10, 30];
+    this.totRetweets = 21;
+    this.totLikes = 11;
+    this. totLikes = 13;
   }
 }

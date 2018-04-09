@@ -7,9 +7,10 @@ import {StudentViewComponent} from './student-view/student-view.component';
 import {EditClassComponent} from './edit-class/edit-class.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/home', pathMatch: 'full' },
   {path: 'create', component: CreateClassComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'view/:courseNum', component: ClassViewComponent},
+  {path: 'view/:id', component: ClassViewComponent},
   {path: 'student/:id', component: StudentViewComponent},
   {path: 'edit/:courseNum', component: EditClassComponent}
 ];

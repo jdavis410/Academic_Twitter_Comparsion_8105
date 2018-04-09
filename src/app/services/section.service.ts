@@ -9,7 +9,6 @@ import {of} from 'rxjs/observable/of';
 import {Student} from '../Structs/studentClass';
 
 
-
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
@@ -30,10 +29,10 @@ export class SectionService {
       );
   }
 
-  getSection(courseNum: number) : Observable<Section> {
-    const url = `${this.sectionUrl}/${courseNum}`;
+  getSection(id: number) : Observable<Section> {
+    const url = `${this.sectionUrl}/${id}`;
     return this.http.get<Section>(url).pipe(
-      catchError(this.handleError<Section>(`getSection id=${courseNum}`)
+      catchError(this.handleError<Section>(`getSection id=${id}`)
     ));
   }
 
@@ -45,6 +44,7 @@ export class SectionService {
   }
 
   addSection(section: Section) : Observable<Section> {
+
     return this.http.post<Section>(this.sectionUrl, section, httpOptions).pipe(
       catchError(this.handleError<Section>('addSection')));
   }

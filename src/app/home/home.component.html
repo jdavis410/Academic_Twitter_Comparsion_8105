@@ -1,16 +1,23 @@
-<p>
-  home works!
-</p>
-<form>
-<mat-form-field>
-  <mat-select [(ngModel)]="selectedValue" name="section">
-    <mat-placeholder>Section</mat-placeholder>
-    <mat-option *ngFor="let section of sections" [value]="section.courseNum">
-      {{section.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<button mat-raised-button color="primary" routerLink="/view/{{selectedValue}}">Go to Class</button>
-  <a routerLink="/edit/{{selectedValue}}">Edit Class</a>
+<app-side-bar></app-side-bar>
 
-</form>
+<div align="center" class="main">
+  <form>
+    <div>
+      <h3>Select a Class</h3>
+      <mat-form-field>
+        <mat-select [formControl]="emptyValidation" [(ngModel)]="selectedValue" name="section" required>
+          <mat-placeholder>Section</mat-placeholder>
+          <mat-option *ngFor="let section of sections" [value]="section.id">
+            {{section.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="emptyValidation.invalid">Please Select a class before proceeding</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" routerLink="/view/{{selectedValue}}">Go to Class</button>
+    </div>
+
+      <button mat-button="" [formControl]="emptyValidation" name="alink" routerLink="/edit/{{selectedValue}}" required>Edit Class</button>
+  </form>
+
+  <a routerLink="/create">Create Class</a>
+</div>

@@ -35,11 +35,8 @@ export class InMemoryDataServiceService implements InMemoryDbService{
         totTweets: 13,
         totRetweets: 14,
         totLikes: 15,
-        topicDist: {
-          '#2110ctv' : 5,
-          '#HuckleBerry' : 13,
-          '#Research': 10
-        }
+        topicDist: ['#2110ctv', 'HuckleBerry', 'Research'],
+        topicDistNum: [5, 10, 30]
       },
       {
         id: 90234,
@@ -59,13 +56,13 @@ export class InMemoryDataServiceService implements InMemoryDbService{
         courseNum: 185629,
         name: 'LMC 2110 A',
         roster: students,
-        topics: ['#lit', '#sammy', '#2110kidct']
+        topics: ['#lit', '#LMC', '#2110kidct']
       },
       { id : 185630,
         courseNum: 185630,
         name: 'LMC 2110 B',
         roster: students,
-        topics: ['#lit', '#sammy', '#2110Bkidct']
+        topics: ['#lit', '#LMC', '#2110Bkidct']
       }
     ];
     const roster1 = [

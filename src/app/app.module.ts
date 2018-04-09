@@ -5,7 +5,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { CreateClassComponent } from './create-class/create-class.component';
 
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSnackBarModule} from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSnackBarModule, MatListModule,
+          MatGridListModule, MatCardModule, MatDatepickerModule,
+          MatNativeDateModule, MatIconModule} from '@angular/material';
 import { HomeComponent } from './home/home.component';
 import { TweetComponent } from './tweet/tweet.component';
 
@@ -20,8 +22,11 @@ import {TweetsService} from './services/tweets.service';
 import {SectionService} from './services/section.service';
 import {InMemoryDataServiceService} from './in-memory-data-service.service';
 import { EditClassComponent } from './edit-class/edit-class.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TimeGraphComponent } from './time-graph/time-graph.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +36,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     TweetComponent,
     StudentViewComponent,
     ClassViewComponent,
-    EditClassComponent
+    EditClassComponent,
+    TimeGraphComponent,
+    SideBarComponent
   ],
   imports: [
     BrowserModule,
@@ -43,10 +50,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     MatButtonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatGridListModule,
+    MatListModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
     ChartsModule],
   providers: [StudentService, TweetsService, SectionService],
   bootstrap: [AppComponent]

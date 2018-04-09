@@ -5,6 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {Student} from '../Structs/studentClass';
 import {MatSnackBar} from '@angular/material';
+import {StudentService} from '../services/student.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-class',
@@ -12,14 +14,20 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./edit-class.component.css']
 })
 export class EditClassComponent implements OnInit {
-
+  classForm: FormGroup;
+  cN: string;
+  corN: number;
   section: Section;
   students: Student[];
   inputName: string;
   inputHandle: string;
+  topics: Array<String>;
 
+  emptyValidation = new FormControl([Validators.required]);
+  courseNUmValidation = new FormControl([Validators.required, Validators.pattern('[0-9]*')]);
 
   constructor(private sectionService: SectionService,
+              private studentService: StudentService,
               private route: ActivatedRoute,
               private location: Location,
               public snackBar: MatSnackBar) { }
@@ -32,8 +40,11 @@ export class EditClassComponent implements OnInit {
     const courseNum = +this.route.snapshot.paramMap.get('courseNum');
     this.sectionService.getSection(courseNum)
       .subscribe(section => {
+        this.cN = section.name;
+        this.corN = section.courseNum
         this.section = section;
-        this.students = this.section.roster;
+        this.studentService.getStudents(section.name).subscribe(students => this.students = students);
+        this.topics = this.section.topics;
         console.log('got section');
         console.log(section);
         console.log('Students list');
@@ -47,6 +58,7 @@ export class EditClassComponent implements OnInit {
 
     this.section.roster.push(stu);
 
+    this.studentService.addStudent(stu)
     this.sectionService.updateSection(this.section).subscribe(() => this.snackBar.open('Student Added','', {duration: 500}) );
   }
 
@@ -55,7 +67,12 @@ export class EditClassComponent implements OnInit {
     this.sectionService.updateSection(this.section).subscribe();
   }
 
-  deleteTopic() {}
+  deleteTopic(topic: string) {
+    const i = this.topics.indexOf(topic);
+    this.topics.splice(i, 1);
+    this.section.topics = this.topics;
+    this.sectionService.updateSection(this.section).subscribe(() => this.snackBar.open('Topic Removed', '', {duration : 500}));
+  }
 
   deleteStudent(student: Student) {
     const i = this.students.indexOf(student);
@@ -73,5 +90,20 @@ export class EditClassComponent implements OnInit {
   goback(): void {
     this.location.back();
   }
+
+  searchFile() : void {
+    //doNothing
+  }
+
+  addStudentsFromFile():void {
+    //doNothing
+  }
+
+  getErrorMessage() {
+    return this.courseNUmValidation.hasError('required') ? 'Field Cannot Be Empty' :
+      this.courseNUmValidation.hasError('pattern') ? 'Field may only contain numbers': '';
+  }
+
+
 
 }

@@ -1,25 +1,122 @@
-<p>
-  create-class works!
-</p>
-<div layout="row">
-  <table class="" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field class="">
-          <input matInput placeholder="Name">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="">
-          <input matInput placeholder="Handle">
-        </mat-form-field>
-      </td>
-    </tr>
-  </table>
-</div>
-<button mat-raised-button color="primary">Add Student</button>
+<div class="main">
+  <form #classForm="ngForm">
+    <div align="center">
+      <h3>
+        Add Class Name & Course Number
+      </h3>
+      <mat-form-field>
+        <input matInput placeholder="Class Name" [formControl]="emptyValidation" [(ngModel)]="className" name="className" required>
+        <mat-error *ngIf="emptyValidation.invalid">Field cannot be empty</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Course Number" [formControl]="courseNUmValidation" [(ngModel)]="courseNumber" name="courseNumber" required pattern="[0-9]*">
+        <mat-error *ngIf="courseNUmValidation.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <br>
+      <br>
+    </div>
+    <div align="center">
+      <button type="submit" mat-raised-button color="primary" (click)="createSection()">Create Class</button>
+
+    </div>
 
 
-<div>
-  <button mat-raised-button color="primary">Create</button>
+    <br>
+
+    <div class="row">
+      <div class="column" align="">
+        <h3>
+          Add Students
+        </h3>
+        <div layout="row">
+
+          <div layout="column">
+            <mat-form-field class="">
+              <input matInput placeholder="Name" [(ngModel)]="inputName" name="stuName">
+              <mat-error *ngIf="emptyValidation.invalid">Field cannot be empty</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="">
+              <span matPrefix>@ &nbsp;</span>
+              <input matInput  placeholder="Handle" [(ngModel)]="inputHandle" name="stuHandle">
+              <mat-error *ngIf="emptyValidation.invalid">Field cannot be empty</mat-error>
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="primary" (click)="addStudent(inputName, inputHandle)">Add Student</button>
+
+        </div>
+
+
+        <div layout="row">
+          <mat-form-field class="">
+            <input matInput placeholder="Select a file, ex: .csv, .exel" [(ngModel)]="inputFileLocation" name="fileLoc">
+          </mat-form-field>
+          <button mat-basic-chip color="secondary" (click)="searchFile()">Search</button>
+        </div>
+
+        <button mat-raised-button color="primary" (click)="addStudentsFromFile()">Add Students</button>
+
+        <h3>
+          Student Roster
+        </h3>
+
+        <mat-nav-list>
+          <mat-list-item *ngFor="let student of students">
+
+            {{student.name}} | {{student.handle}}
+
+            <button mat-button (click)="deleteStudent(student)">
+              x
+            </button>
+          </mat-list-item>
+        </mat-nav-list>
+
+
+
+
+      </div>
+
+      <div class="column" align="">
+
+        <div layout="row">
+          <h3>
+            Add Topics
+          </h3>
+          <mat-form-field class="">
+            <input matInput placeholder="Topic Name" [(ngModel)]="inputTopic" name="topicN">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addTopic(inputTopic)">Add Topic</button>
+
+        </div>
+
+        <h3>
+          Topic List
+        </h3>
+
+        <mat-nav-list>
+          <mat-list-item *ngFor="let t of topics" align="right">
+            {{t}}
+
+            <button mat-button (click)="deleteTopic(t)">
+              x
+            </button>
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
+    </div>
+
+
+  </form>
+
+
+
+  <div layout="row">
+
+  </div>
+  <div>
+    <p></p>
+  </div>
 </div>
