@@ -1,8 +1,9 @@
-<div class="main">
+<div>
   <div align="center">
     <h3>
       {{student.name}} | {{student.handle}}
     </h3>
+    <button mat-raised-button color="primary" (click)="exportData()">Export Student's Data</button>
   </div>
   <div class="row">
     <div class="column">
@@ -14,7 +15,8 @@
               [legend]="barChartLegend"
               [chartType]="barChartType"
               (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+              (chartClick)="chartClicked($event)"
+              height="70"></canvas>
     </div>
     <div class="column">
       <h3>{{student.handle}}'s Topic Distribution</h3>
@@ -24,7 +26,8 @@
               [options]="doughnutChartOptions"
               [chartType]="doughnutChartType"
               (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+              (chartClick)="chartClicked($event)"
+              height="70"></canvas>
     </div>
   </div>
   <div align="center">

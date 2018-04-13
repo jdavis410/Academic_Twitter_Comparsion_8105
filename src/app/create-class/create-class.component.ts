@@ -6,7 +6,7 @@ import {Section} from '../Structs/sectionClass';
 import {Location} from '@angular/common';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {bindCallback} from 'rxjs/observable/bindCallback';
-import {MatSnackBar} from '@angular/material';
+import {MatSnackBar, MatTable} from '@angular/material';
 
 
 @Component({
@@ -21,6 +21,8 @@ export class CreateClassComponent implements OnInit {
   className: string;
   courseNumber: number;
   topics: Array<String>;
+
+  displayedColumns = ['name', 'handle'];
 
   sections;
   emptyValidation = new FormControl([Validators.required]);

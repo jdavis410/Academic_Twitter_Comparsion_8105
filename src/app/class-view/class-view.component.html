@@ -1,12 +1,11 @@
-<app-side-bar></app-side-bar>
-
-<div class="main">
+<div>
   <div align="center">
     <h2>
       {{section.name}}
     </h2>
   </div>
   <form>
+    <h3>Select a Student to view</h3>
     <mat-form-field>
       <mat-select [formControl]="emptyValidation" [(ngModel)]="selectedValue" name="student" required>
         <mat-placeholder>Goto Student</mat-placeholder>
@@ -19,9 +18,6 @@
     <button mat-raised-button color="primary" routerLink="/student/{{selectedValue}}">Go to Student</button>
   </form>
 
-  <br>
-  <br>
-
   <div class="row">
     <div class="column">
       <h3>Class Tweet Type Distribution</h3>
@@ -32,7 +28,8 @@
               [legend]="barChartLegend"
               [chartType]="barChartType"
               (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+              (chartClick)="chartClicked($event)"
+              height="70"></canvas>
     </div>
     <div class="column">
       <h3>Class Topic Distribution</h3>
@@ -42,7 +39,8 @@
               [options]="doughnutChartOptions"
               [chartType]="doughnutChartType"
               (chartHover)="chartHovered($event)"
-              (chartClick)="chartClicked($event)"></canvas>
+              (chartClick)="chartClicked($event)"
+              height="70"></canvas>
     </div>
   </div>
   <div>

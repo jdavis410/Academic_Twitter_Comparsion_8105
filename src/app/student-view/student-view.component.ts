@@ -1,7 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {StudentService} from '../services/student.service';
 import {Student} from '../Structs/studentClass';
 import {ActivatedRoute} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-student-view',
@@ -49,7 +50,8 @@ export class StudentViewComponent implements OnInit {
   public doughnutChartType:string = 'doughnut';
 
   constructor(private studentService : StudentService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private matDialog: MatDialog) {}
 
   ngOnInit() {
     this.getStudent();
@@ -74,5 +76,28 @@ export class StudentViewComponent implements OnInit {
         console.log('Student recievedd');
         console.log(student);
       });
+  }
+
+  exportData() : void {
+    let dialogRef = this.matDialog.open(ExportDialogComponent, {
+      width: '250px'
+    });
+  }
+}
+
+@Component({
+  selector: 'app-export-dialog',
+  templateUrl: './export-dialog.component.html',
+})
+
+export class ExportDialogComponent {
+
+
+  constructor(public dialogRef: MatDialogRef<ExportDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+
+  onClose() : void {
+    this.dialogRef.close();
   }
 }
