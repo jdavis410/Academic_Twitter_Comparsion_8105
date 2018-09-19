@@ -3,6 +3,7 @@ import {StudentService} from '../services/student.service';
 import {Student} from '../Structs/studentClass';
 import {ActivatedRoute} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import { Tweet } from '../Structs/tweetClass';
 
 @Component({
   selector: 'app-student-view',
@@ -43,6 +44,7 @@ export class StudentViewComponent implements OnInit {
   public barChartData:any[] = [
     {data: [0]}
   ];
+  public tweets:Tweet[] = [];
 
 
   public doughnutChartLabels:string[] = ['#2110ctv', 'HuckleBerry', 'Research'];
@@ -73,6 +75,7 @@ export class StudentViewComponent implements OnInit {
         this.student = student;
         this.barChartData = [{data: [student.totTweets, student.totRetweets, student.totLikes]}];
         this.doughnutChartData = this.student.topicDistNum;
+        this.tweets = this.student.tweets;
         console.log('Student recievedd');
         console.log(student);
       });
