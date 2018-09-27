@@ -64,6 +64,9 @@ export class EditClassComponent implements OnInit {
 
   addTopic(topic : string) {
     this.section.topics.push(topic);
+    console.log("TOPIC ADDED");
+    console.log(this.section.topics);
+
     this.sectionService.updateSection(this.section).subscribe();
   }
 

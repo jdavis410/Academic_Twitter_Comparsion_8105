@@ -34,6 +34,21 @@ router.get('/sections/:id', (req, res) => {
 });
 
 //put new section
+router.put('/sections', (req, res) => {
+  console.log("PUT SECTION")
+  console.log(req.body);
+  SectionModel.update({id: req.body.id}, req.body, function(err, section) {
+    console.log("Updated");
+    if (err) throw err;
+
+    // object of all the users
+    console.log(section);
+    res.json(section);
+  });
+  console.log("-------")
+});
+
+//put new section
 router.post('/sections', (req, res) => {
   console.log("NEW SECTION")
   console.log(req.body);
@@ -80,7 +95,21 @@ router.get('/students/sectionID/:id', (req, res) => {
   });
 });
 
-//put new section
+//put new student
+router.put('/students', (req, res) => {
+  console.log("PUT STUDENT")
+  console.log(req.body);
+  StudentModel.findOneAndUpdate({id: req.body.id}, function(err, student) {
+    if (err) throw err;
+
+    // object of all the users
+    console.log(students);
+    res.json(students);
+  });
+  console.log("-------")
+});
+
+//post new student
 router.post('/students', (req, res) => {
   console.log("NEW STUDENT")
   console.log(req.body);
