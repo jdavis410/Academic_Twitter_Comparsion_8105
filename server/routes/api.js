@@ -127,7 +127,7 @@ router.post('/students', (req, res) => {
   console.log(req.body);
   console.log("-------")
   var newStudent = StudentModel({
-        id : stringHash(req.body.handle) << 10 + req.body.courseNum,
+        id : stringHash(req.body.handle) * 1000000 + req.body.courseNum,
         name :  req.body.name,
         handle:  req.body.handle,
         courseNum: req.body.courseNum,
