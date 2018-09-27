@@ -43,7 +43,7 @@ export class EditClassComponent implements OnInit {
         this.cN = section.name;
         this.corN = section.courseNum
         this.section = section;
-        this.studentService.getStudents(section.name).subscribe(students => this.students = students);
+        this.studentService.getStudents(section.courseNum).subscribe(students => this.students = students);
         this.topics = this.section.topics;
         console.log('got section');
         console.log(section);
