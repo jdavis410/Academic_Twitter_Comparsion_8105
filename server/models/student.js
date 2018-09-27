@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var studentSchema = new Schema({
-        id : Schema.Types.ObjectId,
+        id : Number,
         name :  String,
         handle:  { type: String, required: true},
         courseNum: {type: Number, required: true},

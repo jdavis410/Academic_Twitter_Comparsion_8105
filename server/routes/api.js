@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 var SectionModel = require('../models/section.js');
 var StudentModel = require("../models/student.js");
-
+var stringHash = require("string-hash");
 
 // Get all sections
 router.get('/sections', (req, res) => {
@@ -109,12 +109,25 @@ router.put('/students', (req, res) => {
   console.log("-------")
 });
 
+//delete student
+router.delete('/students/:id', (req, res) => {
+  console.log("DELETE student");
+  console.log(req.params);
+  StudentModel.deleteOne({id: req.params.id}, function(err, student) {
+    if (err) throw err;
+
+    res.json(student);
+  })
+
+});
+
 //post new student
 router.post('/students', (req, res) => {
   console.log("NEW STUDENT")
   console.log(req.body);
   console.log("-------")
   var newStudent = StudentModel({
+        id : stringHash(req.body.handle) << 10 + req.body.courseNum,
         name :  req.body.name,
         handle:  req.body.handle,
         courseNum: req.body.courseNum,

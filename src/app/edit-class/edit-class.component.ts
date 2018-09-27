@@ -55,11 +55,9 @@ export class EditClassComponent implements OnInit {
   addStudent(name: string, handle: string) : void {
     let stu = new Student(name, handle);
     stu.section = this.section.name;
-
-    this.section.roster.push(stu);
-
-    this.studentService.addStudent(stu)
-    this.sectionService.updateSection(this.section).subscribe(() => this.snackBar.open('Student Added','', {duration: 500}) );
+    stu.courseNum = this.section.courseNum;
+    stu.topicDist = this.section.topics;
+    this.studentService.addStudent(stu).subscribe(() => this.students.push(stu));
   }
 
   addTopic(topic : string) {
@@ -79,11 +77,8 @@ export class EditClassComponent implements OnInit {
 
   deleteStudent(student: Student) {
     const i = this.students.indexOf(student);
-
-    this.students.splice(i,1);
-
-    this.section.roster = this.students;
-    this.sectionService.updateSection(this.section).subscribe(() => this.snackBar.open('Student Removed', '', {duration: 500}));
+    let stu = this.students[i];
+    this.studentService.deleteStudent(stu).subscribe(() => this.students.splice(i,1));
   }
 
   deleteSection() : void {
