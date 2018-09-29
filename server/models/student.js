@@ -4,13 +4,13 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var studentSchema = new Schema({
-        id: { type: Number, required: true, unique: true },
+        id : Number,
         name :  String,
-        handle:  { type: String, required: true },
-        section: String,
-        totTweets: Number,
-        totRetweets: Number,
-        totLikes: Number,
+        handle:  { type: String, required: true},
+        courseNum: {type: Number, required: true},
+        totTweets: {type: Number, default: 0},
+        totRetweets: {type: Number, default: 0},
+        totLikes: {type: Number, default: 0},
         topicDist: [String],
         topicDistNum: [Number]
 });

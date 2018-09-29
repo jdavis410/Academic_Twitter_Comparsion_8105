@@ -6,8 +6,9 @@ var Schema = mongoose.Schema;
 var sectionSchema = new Schema({
         id: { type: Number, required: true, unique: true },
         courseNum: { type: Number, required: true, unique: true },
+        startDate: {type : Date, default: Date.now },
+        endDate: {type : Date, default: Date.now },
         name: String,
-        roster: [String],
         topics: [String]
 });
 
