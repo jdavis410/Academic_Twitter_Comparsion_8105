@@ -5,6 +5,13 @@ const http = require('http');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://matt:msl@academictwitter-nlieo.mongodb.net/test?retryWrites=true');
 
+//run tweet collection every ______
+function collectTweets() {
+  var cp = require('child_process');
+  var n = cp.fork('./server/twitter/collect.js');
+}
+setInterval(collectTweets, 3000); //this is in ms
+
 const bodyParser = require('body-parser');
 
 // Get our API routes
