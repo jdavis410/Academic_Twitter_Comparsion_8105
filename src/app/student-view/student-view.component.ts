@@ -45,6 +45,7 @@ export class StudentViewComponent implements OnInit {
   public barChartData:any[] = [
     {data: [0]}
   ];
+  public tweets:Tweet[] = [];
 
 
   public doughnutChartLabels:string[] = ['#2110ctv', 'HuckleBerry', 'Research'];
@@ -69,7 +70,9 @@ export class StudentViewComponent implements OnInit {
   }
 
   getStudent() : void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log("Student view")
+    console.log(id);
     this.studentService.getStudent(id)
       .subscribe(student => {
         this.student = student;
@@ -80,6 +83,8 @@ export class StudentViewComponent implements OnInit {
         console.log(this.tweets);
         console.log(student);
       });
+    console.log("_____________")
+    
   }
 
   exportData() : void {
