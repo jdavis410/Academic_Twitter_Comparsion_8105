@@ -37,6 +37,22 @@ export class TweetsService {
   }
 
 
+  addTweets(tweets: Tweet[]) {
+    let objArr = new Array<Object>();
+    let promise = new Promise((resolve, reject) =>{
+      for (let t of tweets) {
+        this.http.post<Tweet>(this.tweetUrl, t, httpOptions)
+          .toPromise()
+          .then(twt => {
+            console.log(twt);
+            objArr.push(t);
+            resolve();
+          });
+      }
+      return promise;
+    });
+  }
+
 
   private log(message: string) {
     // add log messaging here
