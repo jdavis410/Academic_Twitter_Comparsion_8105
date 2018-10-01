@@ -8,8 +8,10 @@ router.get('/', (req, res) => {
 
 var SectionModel = require('../models/section.js');
 var StudentModel = require("../models/student.js");
+var TwitterModel = require("../models/tweet.js");
 var stringHash = require("string-hash");
 
+// SECTIONS
 // Get all sections
 router.get('/sections', (req, res) => {
     SectionModel.find({}, function(err, sections) {
@@ -70,6 +72,7 @@ router.post('/sections', (req, res) => {
 
 });
 
+// STUDENTS 
 // Get student by id
 router.get('/students/:id', (req, res) => {
   console.log("get student by id");
@@ -137,14 +140,79 @@ router.post('/students', (req, res) => {
         topicDist: req.body.topicDist,
         topicDistNum: req.body.topicDistNum
   })
-
     newStudent.save(function(err) {
         if (err) throw err;
-
-
     });
+});
 
+//TWEETS
+// Get tweets by tweet id
+router.get('/tweets/:id', (req, res) => {
+  console.log("Getting tweets by tweet id");
+  console.log(req.params);
+  StudentModel.findOne({id: req.params.id}, function(err, tweet) {
+    if (err) throw err;
 
+    console.log(tweet);
+    res.json(tweet);
+  });
+});
+
+// Get all tweets for a specific student
+router.get('/studentID/sectionID/:id', (req, res) => {
+  console.log("Getting all tweets for student id");
+  console.log(req.params);
+  StudentModel.find({studentID: req.params.id}, function(err, tweets) {
+    if (err) throw err;
+    // object of all the tweets
+    console.log(tweets);
+    res.json(tweets);
+  });
+});
+
+// Put new tweet
+router.put('/tweets', (req, res) => {
+  console.log("Put Tweets")
+  console.log(req.body);
+  StudentModel.findOneAndUpdate({id: req.body.id}, function(err, tweet) {
+    if (err) throw err;
+
+    // object of all the tweets
+    console.log(tweets);
+    res.json(tweets);
+  });
+  console.log("-------")
+});
+
+//Delete tweet by id
+router.delete('/tweets/:id', (req, res) => {
+  console.log("DELETE tweet");
+  console.log(req.params);
+  StudentModel.deleteOne({id: req.params.id}, function(err, tweet) {
+    if (err) throw err;
+
+    res.json(tweet);
+  })
+
+});
+
+// Post new tweet
+router.post('/tweets', (req, res) => {
+  console.log("New Tweet")
+  console.log(req.body);
+  console.log("-------")
+  var newTweet = TweetModel({
+        id : req.body.id,
+        user : req.body.user,
+        timestamp: req.body.timestamp,
+        content: req.body.content,
+        hashtags: req.body.hashtags,
+        likes_count: req.body.likes_count,
+        retweets_count: req.body.retweets_count,
+  })
+    newStudent.save(function(err) {
+        if (err) throw err;
+    });
 });
 
 
