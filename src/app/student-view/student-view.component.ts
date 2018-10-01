@@ -40,6 +40,7 @@ export class StudentViewComponent implements OnInit {
   public barChartLabels:string[] = ['Tweets', 'Retweets', 'Likes'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = false;
+  public tweets:Tweet[] = [];
 
   public barChartData:any[] = [
     {data: [0]}
@@ -79,6 +80,7 @@ export class StudentViewComponent implements OnInit {
         this.doughnutChartData = this.student.topicDistNum;
         this.tweets = this.student.tweets;
         console.log('Student recievedd');
+        console.log(this.tweets);
         console.log(student);
       });
     console.log("_____________")
