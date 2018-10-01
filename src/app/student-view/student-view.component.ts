@@ -45,7 +45,6 @@ export class StudentViewComponent implements OnInit {
   public barChartData:any[] = [
     {data: [0]}
   ];
-  public tweets:Tweet[] = [];
 
 
   public doughnutChartLabels:string[] = ['#2110ctv', 'HuckleBerry', 'Research'];

@@ -3,14 +3,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // create a schema
-export var tweetSchema = new Schema({
+var tweetSchema = new Schema({
 	id : { type: Number, required: true, unique: true },
-	user : { type: String, required: true},
+	username : { type: String, required: true},
+	handle : { type: String, required: true},
 	timestamp: { type: String, required: true},
 	content: String,
 	hashtags: [String],
-	likes_count: Number,
-	retweets_count: Number,
+	likes: Number,
+	retweets: Number,
 });
 
 var TweetModel = mongoose.model('TweetModel', tweetSchema);

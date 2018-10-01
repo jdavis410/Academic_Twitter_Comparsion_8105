@@ -159,22 +159,23 @@ router.get('/tweets/:id', (req, res) => {
 });
 
 // Get all tweets for a specific student
-router.get('/studentID/sectionID/:id', (req, res) => {
+router.get('/tweets/students/:handle', (req, res) => {
   console.log("Getting all tweets for student id");
   console.log(req.params);
-  StudentModel.find({studentID: req.params.id}, function(err, tweets) {
+  TweetModel.find({handle: req.params.handle}, function(err, tweets) {
     if (err) throw err;
     // object of all the tweets
     console.log(tweets);
     res.json(tweets);
   });
+  console.log("-------");
 });
 
-// Put new tweet
+// Put tweet
 router.put('/tweets', (req, res) => {
   console.log("Put Tweets")
   console.log(req.body);
-  StudentModel.findOneAndUpdate({id: req.body.id}, function(err, tweet) {
+  TweetModel.findOneAndUpdate({id: req.body.id}, function(err, tweet) {
     if (err) throw err;
 
     // object of all the tweets
@@ -188,7 +189,7 @@ router.put('/tweets', (req, res) => {
 router.delete('/tweets/:id', (req, res) => {
   console.log("DELETE tweet");
   console.log(req.params);
-  StudentModel.deleteOne({id: req.params.id}, function(err, tweet) {
+  TweetModel.deleteOne({id: req.params.id}, function(err, tweet) {
     if (err) throw err;
 
     res.json(tweet);
@@ -202,13 +203,14 @@ router.post('/tweets', (req, res) => {
   console.log(req.body);
   console.log("-------")
   var newTweet = TweetModel({
-        id : req.body.id,
-        user : req.body.user,
+        id : stringHash(req.body.username) + stringHash(content),
+        user : req.body.username,
+        handle : req.body.handle,
         timestamp: req.body.timestamp,
-        content: req.body.content,
-        hashtags: req.body.hashtags,
-        likes_count: req.body.likes_count,
-        retweets_count: req.body.retweets_count,
+        content : req.body.content,
+        hashtags : req.body.hashtags,
+        likes : req.body.likes,
+        retweets : req.body.retweets
   })
     newStudent.save(function(err) {
         if (err) throw err;
