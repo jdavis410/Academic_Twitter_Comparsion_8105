@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 var SectionModel = require('../models/section.js');
 var StudentModel = require("../models/student.js");
-var TwitterModel = require("../models/tweet.js");
+var TweetModel = require("../models/tweet.js");
 var stringHash = require("string-hash");
 
 // SECTIONS
@@ -27,9 +27,6 @@ router.get('/sections/:id', (req, res) => {
     if (err) throw err;
 
     // object of all the users
-    console.log("get section with id");
-    console.log(sections);
-    console.log("-------------------")
 
     res.json(sections);
   });
@@ -37,24 +34,16 @@ router.get('/sections/:id', (req, res) => {
 
 //put new section
 router.put('/sections', (req, res) => {
-  console.log("PUT SECTION")
-  console.log(req.body);
   SectionModel.update({id: req.body.id}, req.body, function(err, section) {
-    console.log("Updated");
     if (err) throw err;
 
     // object of all the users
-    console.log(section);
     res.json(section);
   });
-  console.log("-------")
 });
 
 //put new section
 router.post('/sections', (req, res) => {
-  console.log("NEW SECTION")
-  console.log(req.body);
-  console.log("-------")
   var newSection = SectionModel({
       id: req.body.courseNum,
       courseNum: req.body.courseNum,  
@@ -75,47 +64,35 @@ router.post('/sections', (req, res) => {
 // STUDENTS 
 // Get student by id
 router.get('/students/:id', (req, res) => {
-  console.log("get student by id");
-  console.log(req.params);
   StudentModel.findOne({id: req.params.id}, function(err, student) {
     if (err) throw err;
 
-    console.log(student);
     res.json(student);
   });
 });
 
 // Get all students for section
 router.get('/students/sectionID/:id', (req, res) => {
-  console.log("get students");
-  console.log(req.params);
   StudentModel.find({courseNum: req.params.id}, function(err, students) {
     if (err) throw err;
 
     // object of all the users
-    console.log(students);
     res.json(students);
   });
 });
 
 //put new student
 router.put('/students', (req, res) => {
-  console.log("PUT STUDENT")
-  console.log(req.body);
   StudentModel.findOneAndUpdate({id: req.body.id}, function(err, student) {
     if (err) throw err;
 
     // object of all the users
-    console.log(students);
     res.json(students);
   });
-  console.log("-------")
 });
 
 //delete student
 router.delete('/students/:id', (req, res) => {
-  console.log("DELETE student");
-  console.log(req.params);
   StudentModel.deleteOne({id: req.params.id}, function(err, student) {
     if (err) throw err;
 
@@ -126,9 +103,6 @@ router.delete('/students/:id', (req, res) => {
 
 //post new student
 router.post('/students', (req, res) => {
-  console.log("NEW STUDENT")
-  console.log(req.body);
-  console.log("-------")
   var newStudent = StudentModel({
         id : stringHash(req.body.handle) * 1000000 + req.body.courseNum,
         name :  req.body.name,
@@ -150,7 +124,7 @@ router.post('/students', (req, res) => {
 router.get('/tweets/:id', (req, res) => {
   console.log("Getting tweets by tweet id");
   console.log(req.params);
-  StudentModel.findOne({id: req.params.id}, function(err, tweet) {
+  TweetModel.findOne({id: req.params.id}, function(err, tweet) {
     if (err) throw err;
 
     console.log(tweet);
@@ -203,7 +177,7 @@ router.post('/tweets', (req, res) => {
   console.log(req.body);
   console.log("-------")
   var newTweet = TweetModel({
-        id : stringHash(req.body.username) + stringHash(content),
+        id : req.body.id,
         user : req.body.username,
         handle : req.body.handle,
         timestamp: req.body.timestamp,
@@ -212,7 +186,7 @@ router.post('/tweets', (req, res) => {
         likes : req.body.likes,
         retweets : req.body.retweets
   })
-    newStudent.save(function(err) {
+    newTweet.save(function(err) {
         if (err) throw err;
     });
 });
