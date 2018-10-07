@@ -21,6 +21,9 @@ export class CreateClassComponent implements OnInit {
   className: string;
   courseNumber: number;
   topics: Array<String>;
+  inputName: string;
+  inputHandle: string;
+  inputTopic: string;
 
   displayedColumns = ['name', 'handle'];
 
@@ -48,6 +51,8 @@ export class CreateClassComponent implements OnInit {
   addStudent(name: string, handle: string): void {
     const stu = new Student(name, '@'.concat(handle));
     this.students.push(stu);
+    this.inputName = '';
+    this.inputHandle = '';
   }
 
   deleteStudent(student: Student) {
@@ -58,6 +63,7 @@ export class CreateClassComponent implements OnInit {
 
   addTopic(topic: string) : void {
     this.topics.push(topic);
+    this.inputTopic = '';
   }
 
   deleteTopic(topic: string) : void {
@@ -109,6 +115,7 @@ export class CreateClassComponent implements OnInit {
         for(let stu of this.students) {
           stu.topicDist = this.topics;
           stu.section = section.name;
+          stu.courseNum = section.courseNum;
         }
 
         this.studentService.addStudents(this.students);
